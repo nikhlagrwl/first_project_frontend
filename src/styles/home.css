@@ -1,0 +1,113 @@
+.full {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-image: linear-gradient(to left, #eaedf4, white);
+	height: 100%;
+}
+
+.homeHeader {
+	background-color: #3399ff;
+	font-size: 1.5em;
+	color: #ccffff;
+	background-image: linear-gradient(to right, #0000cc, #3399ff);
+	width: 100%;
+	height: 5%;
+}
+
+.headerText {
+	margin: 0px 0px 0px 5px;
+	padding: 5px 0px 0px 0px;
+	width: auto;
+}
+
+.outerDiv {
+	height:95%;
+
+}
+
+.innerDiv {
+	float: left;
+	width: 50%;
+	height: auto;
+
+}
+
+.headlineDiv {
+	height: auto;
+	width: 100%;
+	margin: 35% 0 0 15%;
+	font-size: 2em;
+}
+
+.innerFormDiv {
+	height: 425px;
+	width: 350px;
+	margin: 25% 0% 25% 25%;
+	background-color: #dfe9ed;
+}
+
+.mainForm {
+	width: 90%;
+	margin: 5% 0 0 5%;
+}
+
+.formHead {
+	color: red;
+	font-size: 2em;
+	font-variant-alternates: normal;
+	font-style: bold;
+	padding-top: 10px;
+	/*margin-top: 50px;*/
+}
+
+.modeTxt {
+	width: 50%;
+	height: 35px;
+	margin-left: 25%;
+	text-align: center;
+}
+
+.inputText {
+	margin: 5% 0 0 5%;
+	padding: 2px 2px 2px 2px;
+	width: 70%;
+	font-size: 1em;
+	height: 30px
+}
+
+.submitButton {
+	margin: 10% 0 0 5%;
+	cursor: pointer;
+	background-color: #dfe9ed;
+	border-radius: 5px;
+	height: 30px;
+
+}
+
+.changeButton {
+	border: none;
+	background-color: #dfe9ed;
+	height: 30px;
+	margin: 0 0 0 5%;
+	outline: none;
+	cursor: pointer;
+}
+
+.afterForm {
+	background-color: #dfe9ed;
+	margin: 5% 0 0 4%;
+}
+
+.logoutButton {
+	float: right;
+	margin: 0 10px 0 0;
+}
+
+.indexHeader {
+	float: left;
+	width: auto;
+	margin: 5px 0 0 0;
+}
