@@ -35,7 +35,7 @@ class Login extends React.Component {
 		
 		let val = JSON.stringify(data);
 
-		fetch('http://127.0.0.1:8000/login/', {
+		fetch('http://localhost:8000/login/', {
 		    method: 'POST',
 		    headers: {
 		    	'content-type': 'application/json'

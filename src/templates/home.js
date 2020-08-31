@@ -75,7 +75,7 @@ class Home extends React.Component {
 
 					<div className = "full">
 						<header className = 'homeHeader'>
-							<div className = 'headerText'>Hello World!!!</div>
+							<div className = 'headerText'>ProjectHub</div>
 						</header>
 
 						<div className = "outerDiv">
@@ -108,9 +108,14 @@ class Home extends React.Component {
 
 									<div className = 'afterForm'>
 									{ !isNewUser ?
-										<button className = "changeButton" onClick = {this.changeMode}>
-											Don't have an account
-										</button>
+										<div>
+											<button className = "changeButton" onClick = {this.changeMode}>
+												Don't have an account ?
+											</button>
+											<button className = "changeButton" onClick = {this.changeMode}>
+												Forgot Password
+											</button>
+										</div>
 										:
 										<button className = "changeButton" onClick = {this.changeMode}>
 											Already a member

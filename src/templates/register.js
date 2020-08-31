@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
 class Register extends React.Component {
@@ -39,8 +40,9 @@ class Register extends React.Component {
 		}
 
 		let val = JSON.stringify(data);
+		console.log(val);
 
-		fetch('http://127.0.0.1:8000/register/', {
+		fetch('http://localhost:8000/register/', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
@@ -50,6 +52,12 @@ class Register extends React.Component {
 		.then( result => result.json())
 		.then( (result) => {
 			console.log(result);
+			if(result.response === 'registration successfull') {
+				this.setState({
+				registrationSuccess: true
+				})
+				localStorage.setItem("token", result.token);
+			}
 		},
 		 (error) => {
 		 	console.log(error);
@@ -59,34 +67,42 @@ class Register extends React.Component {
 	}
 
 	render() {
-		return (
-			<div>
-			
-				<form  onSubmit = {this.handleSubmit} method = "POST" >
+		let registrationSuccess = this.state.registrationSuccess;
+		if(registrationSuccess) {
+			return(
+				<Redirect to = "/user/userdetails" />
+			)
+		}
+		else {
+			return (
+				<div>
+				
+					<form  onSubmit = {this.handleSubmit} method = "POST" >
 
-					<div>
-						<input placeholder = "First and Last name" className = 'inputText' type = "text" name = "full_name" value = {this.state.full_name} onChange = {this.handleChange}/>
-					</div>
+						<div>
+							<input placeholder = "First and Last name" className = 'inputText' type = "text" name = "full_name" value = {this.state.full_name} onChange = {this.handleChange}/>
+						</div>
 
-					<div>
-						<input placeholder = "Email" className = 'inputText' type = "email" name = "email" value = {this.state.email} onChange = {this.handleChange}/>
-					</div>
-					
-					<div>
-						<input placeholder = "Password" className = 'inputText' type = "password" name = "password" value = {this.state.password} onChange = {this.handleChange}/>
-					</div>
+						<div>
+							<input placeholder = "Email" className = 'inputText' type = "email" name = "email" value = {this.state.email} onChange = {this.handleChange}/>
+						</div>
+						
+						<div>
+							<input placeholder = "Password" className = 'inputText' type = "password" name = "password" value = {this.state.password} onChange = {this.handleChange}/>
+						</div>
 
-					<div>
-						<input placeholder = "Confirm Password" className = 'inputText' type = "password" name = "confirm_password" value = {this.state.confirm_password} onChange = {this.handleChange}/>
-					</div>
+						<div>
+							<input placeholder = "Confirm Password" className = 'inputText' type = "password" name = "confirm_password" value = {this.state.confirm_password} onChange = {this.handleChange}/>
+						</div>
 
-					<div >
-						<button className = "submitButton" >Sign Up!</button>
-					</div>
-				</form>
+						<div >
+							<button className = "submitButton" >Sign Up!</button>
+						</div>
+					</form>
 
-			</div>
-		);
+				</div>
+			);
+		}
 	}
 }
 

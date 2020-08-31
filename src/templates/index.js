@@ -9,18 +9,38 @@ class index extends React.Component {
 		super(props);
 		this.state = {
 			first_name: 'Nikhil',
-			isLoggedIn: true
+			isLoggedIn: true,
+			skillList: null,
+			isLoaded: false
 		};
 		this.logout = this.logout.bind(this);
 
 	}
 
 	componentDidMount() {
-		const token = localStorage.getItem("token")
+		const token = localStorage.getItem("token");
+		// const csrf = localStorage.getItem("csrftoken");
+		// console.log(csrf)
 		// console.log(typeof(token))
-		if(token.length > 0)
+		if(token !== null)
 		{
-			
+			fetch('http://localhost:8000/get_skill_list/', {
+			method: 'GET',
+			headers: {
+				'Authorization' : "Token "+token
+			}
+			})
+			.then(result => result.json())
+			.then( (result) => {
+				console.log(result);
+				this.setState({
+					skillList: result,
+					isLoaded: true
+				})
+			},
+			(error) => {
+				console.log(error);
+			})
 		}
 		else {
 			this.setState({
@@ -30,7 +50,7 @@ class index extends React.Component {
 	}
 
 	logout() {
-		fetch('http://127.0.0.1:8000/logout/')
+		fetch('http://localhost:8000/logout/')
 		.then(result => result.json())
 		.then( (result) => {
 			if(result.response === 'logout success') {
@@ -48,6 +68,8 @@ class index extends React.Component {
 	render() {
 		let isLoggedIn = this.state.isLoggedIn;
 		let first_name = this.state.first_name;
+		let skillList = this.state.skillList;
+		let isLoaded = this.state.isLoaded;
 
 		if(isLoggedIn)
 		{
@@ -58,47 +80,18 @@ class index extends React.Component {
 							Welcome {first_name}
 						</div>
 
-						<div className = "logoutButton">
-							<button onClick = {this.logout}>Logout</button>
+						<div >
+							<button className = "logoutButton" onClick = {this.logout}>Logout</button>
 						</div>
 					</header>
-					{/*<div>
-						<form onSubmit = {this.handleSubmit} method = "POST">
-							<div className = 'form-group col'>
-							
-							<div >
-								<label>Username</label>
-								<input disabled className = 'form-control' type = "text" name = "username" value = {this.state.username} onChange = {this.handleChange}/>
-							</div>
 
-							<div>
-								<label>First Name</label>
-								<input className = 'form-control' type = "text" name = "first_name" value = {this.state.first_name}/>
-							</div>
-							<div>
-								<label>Last Name</label>
-								<input className = 'form-control' type = "text" name = "last_name" value = {this.state.last_name}/>
-							</div>
-							<div>
-								<label>Phone Number</label>
-								<input className = 'form-control' type = "text" name = "phone_no" value = {this.state.phone_no}/>
-							</div>
-							<div>
-								<label>Gender</label>
-								<input className = 'form-control' type = "text" name = "gender" value = {this.state.gender}/>
-							</div>
-							<div>
-								<label>Age</label>
-								<input className = 'form-control' type = "text" name = "age" value = {this.state.age}/>
-							</div>
-
-							<div>
-								<button className = 'btn btn-primary' type = "submit">Login</button>
-							</div>
-
-							</div>
-						</form>
-					</div>*/}
+					<div>
+					{ isLoaded ? skillList.map(obj => (
+						<li key = {obj.skill_id}>{obj.skill_name}
+						</li>
+						)) : null}
+					</div>
+					
 				</div>
 			);
 		}
