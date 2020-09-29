@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
@@ -11,7 +11,9 @@ class index extends React.Component {
 			first_name: 'Nikhil',
 			isLoggedIn: true,
 			skillList: null,
-			isLoaded: false
+			isLoaded: false,
+			ownerProject: null,
+			appliedProject: null
 		};
 		this.logout = this.logout.bind(this);
 
@@ -19,22 +21,20 @@ class index extends React.Component {
 
 	componentDidMount() {
 		const token = localStorage.getItem("token");
-		// const csrf = localStorage.getItem("csrftoken");
-		// console.log(csrf)
-		// console.log(typeof(token))
 		if(token !== null)
 		{
-			fetch('http://localhost:8000/get_skill_list/', {
+			fetch('http://localhost:8000/get_owner_project/', {
 			method: 'GET',
 			headers: {
+				'Content-Type': 'application/json',
 				'Authorization' : "Token "+token
 			}
 			})
 			.then(result => result.json())
 			.then( (result) => {
-				console.log(result);
+				console.log(result.data);
 				this.setState({
-					skillList: result,
+					ownerProject: result.data,
 					isLoaded: true
 				})
 			},
@@ -70,6 +70,7 @@ class index extends React.Component {
 		let first_name = this.state.first_name;
 		let skillList = this.state.skillList;
 		let isLoaded = this.state.isLoaded;
+		let ownerProject = this.state.ownerProject;
 
 		if(isLoggedIn)
 		{
@@ -85,11 +86,21 @@ class index extends React.Component {
 						</div>
 					</header>
 
+
 					<div>
-					{ isLoaded ? skillList.map(obj => (
-						<li key = {obj.skill_id}>{obj.skill_name}
-						</li>
-						)) : null}
+
+						<h1>My Published Projects</h1>
+						<div>
+						{ isLoaded ? ownerProject.map(obj => (
+							<div>
+								<div>
+									{obj.project_title}
+								</div>
+								<a href = "/"+{obj.project_id}>View Details</a>
+							</div>
+							)) : <div>Loading</div> }
+						</div>
+
 					</div>
 					
 				</div>
