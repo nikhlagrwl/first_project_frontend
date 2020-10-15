@@ -96,7 +96,7 @@ class index extends React.Component {
 								<div>
 									{obj.project_title}
 								</div>
-								<a href = "/"+{obj.project_id}>View Details</a>
+								<a href = "/">View Details</a>
 							</div>
 							)) : <div>Loading</div> }
 						</div>
