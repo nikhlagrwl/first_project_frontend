@@ -75,7 +75,7 @@ class Home extends React.Component {
 
 					<div className = "full">
 						<header className = 'homeHeader'>
-							<div className = 'headerText'>ProjectHub</div>
+							<div className = 'headerText'>TheDevPartner</div>
 						</header>
 
 						<div className = "outerDiv">
