@@ -4,6 +4,7 @@ import home from './templates/home';
 import index from './templates/index';
 import userDetail from './templates/userDetail';
 import createProject from './templates/createProject';
+import projectPage from './templates/projectPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 	      <Route path = "/index" exact component = {index} />
 	      <Route path = "/user/userdetails" exact component = {userDetail} />
 	      <Route path = "/user/createProject" exact component = {createProject} />
+	      <Route path = "/project/details" component = {projectPage} />
  
 	    </div>
     </Router>

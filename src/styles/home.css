@@ -5,7 +5,7 @@
 	right: 0;
 	left: 0;
 	background-image: linear-gradient(to left, #eaedf4, white);
-	height: 950px;
+	height: 100%;
 }
 
 .homeHeader {
@@ -123,4 +123,22 @@
 
 .selectStyle {
 	color: red;
+}
+
+.listItem {
+	list-style-type: none;
+	padding: 0px 0px 0px 0px;
+}
+
+.projectList {
+	width: auto;
+}
+
+.projectComponent {
+	background-color: black;
+	width: 50%;
+	justify-content: center;
+	margin: 0px 0px 0px 20%;
+	color: red;
+	align-items: flex-end;
 }

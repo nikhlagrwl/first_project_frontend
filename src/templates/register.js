@@ -2,6 +2,8 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
+const baseUrl = `https://crudapp01.herokuapp.com/`;
+
 class Register extends React.Component {
 
 	constructor(props){
@@ -40,9 +42,9 @@ class Register extends React.Component {
 		}
 
 		let val = JSON.stringify(data);
-		console.log(val);
 
-		fetch('http://localhost:8000/register/', {
+		const url = baseUrl + `register/`;
+		fetch(url, {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'

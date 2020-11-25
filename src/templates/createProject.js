@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
+const baseUrl = `https://crudapp01.herokuapp.com/`;
 
 class createProject extends Component {
 	constructor(props){
@@ -9,6 +10,7 @@ class createProject extends Component {
 		this.state = {
 			isLoggedIn: true,
 			title: '',
+			category: '',
 			description: '',
 			start_date: '',
 			end_date: ''
@@ -45,6 +47,7 @@ class createProject extends Component {
 
 		let data = {
 			"details": {
+				"project_category": this.state.category,
 				"project_title": this.state.title,
 				"project_description": this.state.description
 			},
@@ -53,7 +56,8 @@ class createProject extends Component {
 
 		data = JSON.stringify(data);
 
-		fetch('http://localhost:8000/create_new_project/', {
+		const url = baseUrl + `create_new_project/`;
+		fetch(url, {
 			method: "POST",
 			headers: {
 				'content-type': 'application/json',
@@ -99,10 +103,16 @@ class createProject extends Component {
 
 				<div>
 					<form method = "POST" onSubmit = {this.handleSubmit} className = "loginForm">
+						
+						<div>
+							<label>Project Category</label>
+							<input className = "inputText" type = "text" name = "category" value = {this.state.category} onChange = {this.handleChange}/>
+						</div>
+
 						<div>
 							<label>Project Title</label>
 							<input className = "inputText" type = "text" name = "title" value = {this.state.title} onChange = {this.handleChange}/>
-						</div>
+						</div>						
 
 						<div>
 							<label>Project Description</label>

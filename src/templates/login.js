@@ -2,6 +2,8 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
+const baseUrl = `https://crudapp01.herokuapp.com/`;
+
 class Login extends React.Component {
 
 	constructor(props){
@@ -35,7 +37,8 @@ class Login extends React.Component {
 		
 		let val = JSON.stringify(data);
 
-		fetch('http://localhost:8000/login/', {
+		const url = baseUrl + `login/`;
+		fetch(url, {
 		    method: 'POST',
 		    headers: {
 		    	'content-type': 'application/json'

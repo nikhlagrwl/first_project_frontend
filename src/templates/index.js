@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
+import ProjectComponent from './projectComponent';
 
+const baseUrl = `https://crudapp01.herokuapp.com/`;
 
 class index extends React.Component {
 
@@ -23,7 +25,8 @@ class index extends React.Component {
 		const token = localStorage.getItem("token");
 		if(token !== null)
 		{
-			fetch('http://localhost:8000/get_owner_project/', {
+			const url = baseUrl + `get_owner_project/`;
+			fetch(url, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -32,7 +35,7 @@ class index extends React.Component {
 			})
 			.then(result => result.json())
 			.then( (result) => {
-				console.log(result.data);
+				// console.log(result.data);
 				this.setState({
 					ownerProject: result.data,
 					isLoaded: true
@@ -50,6 +53,7 @@ class index extends React.Component {
 	}
 
 	logout() {
+		const url = baseUrl + `logout/`;
 		fetch('http://localhost:8000/logout/')
 		.then(result => result.json())
 		.then( (result) => {
@@ -87,18 +91,16 @@ class index extends React.Component {
 					</header>
 
 
-					<div>
-
+					<div className = "projectList">
 						<h1>My Published Projects</h1>
 						<div>
-						{ isLoaded ? ownerProject.map(obj => (
-							<div>
-								<div>
-									{obj.project_title}
-								</div>
-								<a href = "/">View Details</a>
-							</div>
-							)) : <div>Loading</div> }
+							<ul className = "listItem">
+								{ isLoaded ? ownerProject.map(obj => (
+									<li className = "projectComponent" key = {obj.project_id}>
+										<ProjectComponent name = {obj.project_id} />
+									</li>
+									)) : <div>Loading</div> }
+							</ul>
 						</div>
 
 					</div>
