@@ -2,7 +2,9 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
-const baseUrl = `https://crudapp01.herokuapp.com/`;
+const baseUrl = `https://thedevpartnerbackend.herokuapp.com/`;
+// const baseUrl = `https://crudapp01.herokuapp.com/`;
+// const baseUrl = `http://localhost:8000/`;
 
 class Register extends React.Component {
 

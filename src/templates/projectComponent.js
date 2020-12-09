@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import projectPage from './projectPage';
 
-const baseUrl = `https://crudapp01.herokuapp.com/`;
+const baseUrl = `https://thedevpartnerbackend.herokuapp.com/`;
 
 class ProjectComponent extends React.Component {
 	constructor(props){
@@ -24,12 +24,11 @@ class ProjectComponent extends React.Component {
 
 		const url = baseUrl + `get_project/`;
 		fetch(url, {
-			method: "POST",
+			method: "GET",
 			headers: {
 				'content-type': 'application/json',
 				'Authorization': "Token " + token
-			},
-			body: data
+			}
 
 		})
 		.then(result => result.json())

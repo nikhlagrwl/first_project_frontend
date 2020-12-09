@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
-const baseUrl = `https://crudapp01.herokuapp.com/`;
+const baseUrl = `https://thedevpartnerbackend.herokuapp.com/`;
 
 class createProject extends Component {
 	constructor(props){
@@ -80,6 +80,7 @@ class createProject extends Component {
 
 
 	render(){
+		const options = ["web", "android", "ios"]
 		let isLoggedIn = this.state.isLoggedIn;
 		if(!isLoggedIn) {
 			return (
@@ -106,7 +107,16 @@ class createProject extends Component {
 						
 						<div>
 							<label>Project Category</label>
-							<input className = "inputText" type = "text" name = "category" value = {this.state.category} onChange = {this.handleChange}/>
+							{/*<input className = "inputText" type = "text" name = "category" value = {this.state.category} onChange = {this.handleChange}/>*/}
+							<select>
+							<option value = "" selected>
+							</option>
+								{options.map(obj => (
+									<option value = {obj}> {obj} </option>
+								))}
+
+
+							</select>
 						</div>
 
 						<div>

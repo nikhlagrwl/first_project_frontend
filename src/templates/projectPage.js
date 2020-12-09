@@ -1,5 +1,7 @@
 import React from 'react';
 
+const baseUrl = `https://thedevpartnerbackend.herokuapp.com/`;
+
 class projectPage extends React.Component {
 	constructor(props){
 		super(props);
@@ -20,8 +22,8 @@ class projectPage extends React.Component {
 		}
 
 		data = JSON.stringify(data);
-
-		fetch('http://localhost:8000/get_project/', {
+		const url = baseUrl + `get_project/`
+		fetch(url, {
 			method: "POST",
 			headers: {
 				'content-type': 'application/json',

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import '../styles/home.css';
 
+const baseUrl = `https://thedevpartnerbackend.herokuapp.com/`;
+
 class userDetailsForm extends Component{
 
 	constructor(props){
@@ -28,7 +30,8 @@ class userDetailsForm extends Component{
 	}
 
 	logout(){
-		fetch('http://localhost:8000/logout/')
+		let url = baseUrl + `logout`;
+		fetch(url)
 		.then(result => result.json())
 		.then( (result) => {
 			if(result.response === 'logout success') {
@@ -46,9 +49,11 @@ class userDetailsForm extends Component{
 	componentDidMount(){
 		const token = localStorage.getItem('token');
 
+		const url_1 = baseUrl + `get_skill_list/`;
+		const url_2 = baseUrl + `get_user_info/`;
 		if(token !== null)
 		{
-			fetch('http://localhost:8000/get_skill_list/', {
+			fetch(url_1, {
 			method: 'GET',
 			headers: {
 				'Authorization' : "Token "+token
@@ -66,7 +71,7 @@ class userDetailsForm extends Component{
 				console.log(error);
 			})
 
-			fetch('http://localhost:8000/get_user_info/', {
+			fetch(url_2, {
 				method: "GET",
 				headers: {
 					'content-type': 'application/json',
